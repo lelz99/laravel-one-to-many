@@ -29,7 +29,8 @@ class UpdateProjectRequest extends FormRequest
             'description' => 'required|string|min:5|max:10000',
             'preview_project' => 'nullable|mimes:jpeg,jpg,png',
             'end_date' => 'nullable|date',
-            'is_published' => 'nullable'
+            'is_published' => 'nullable',
+            'type_id' => 'nullable|exists:types,id'
         ];
     }
 
@@ -43,7 +44,8 @@ class UpdateProjectRequest extends FormRequest
             'description.required' => 'La descrizione è obbligatoria',
             'description.min' => 'La descrizione deve avere minimo :min caratteri',
             'description.max' => 'La descrizione deve avere massimo :max caratteri',
-            'end_date.date' => 'Deve essere una data valida'
+            'end_date.date' => 'Deve essere una data valida',
+            'type_id.exists' => 'Tipo non valido'
         ];
     }
 }

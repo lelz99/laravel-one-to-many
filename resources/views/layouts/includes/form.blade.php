@@ -33,7 +33,21 @@
                 @enderror
             </div>
         </div>
-        <div class="col-8 mb-3">
+        <div class="col-3 mb-3">
+            <label class="mb-2" for="type_id">Selziona un Tipo valido</label>
+            <select class="form-select" id="type_id" name="type_id">
+                <option value="">Nessuno</option>
+                @foreach($types as $type)
+                <option value="{{$type->id}}" @if(old('type_id', $project->type?->id) == $type->id) selected @endif>{{$type->label}}</option>
+                @endforeach
+            </select>
+            <div>
+                @error('type_id')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
+            </div>
+        </div>
+        <div class="col-5 mb-3">
             <label for="preview_project" class="form-label @error('preview_project') is-invalid @elseif (old('preview_project', '')) @enderror">Anteprima Progetto</label>
             <input type="file" class="form-control" id="preview_project" name="preview_project" value="{{ old('preview_project', $project->preview_project)}}">
             <div>

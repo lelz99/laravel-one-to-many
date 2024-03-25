@@ -6,6 +6,7 @@
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Nome</th>
+      <th scope="col">Tipo</th>
       <th scope="col">Pubblicato</th>
       <th scope="col">Data Fine Progetto</th>
       <th scope="col">Data Creazione</th>
@@ -21,6 +22,13 @@
       <th scope="row">{{$project->id}}</th>
       <td>{{$project->title}}</td>
       <td>
+        <span class="badge"  style=" background-color: @if($project->type) {{$project->type?->color}} @else #808080 @endif">
+          @if($project->type) {{$project->type?->label}}
+          @else Nessuno
+          @endif
+        </span>
+      </td>
+      <td>
         @if($project->is_published) <i class="fa-solid fa-circle-check text-success ms-4"></i>
         @else <i class="fa-solid fa-circle-xmark text-danger ms-4"></i> 
         @endif
@@ -32,7 +40,6 @@
         <div class="d-flex gap-1">
           <a href="{{route('admin.projects.show', $project)}}" class="btn btn-sm btn-primary"><i class="fa-regular fa-eye"></i></a>                
           <a href="{{route('admin.projects.edit', $project)}}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
-          {{-- da rivedere --}} 
           <form action="{{route('admin.projects.destroy', $project)}}" method="POST" class="delete-form">
             @csrf
             @method('DELETE')
